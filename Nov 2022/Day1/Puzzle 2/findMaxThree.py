@@ -1,6 +1,9 @@
 file = open('input.txt')
-def find_max_cal(handle):
-    max_cal = 0
+
+
+def find_max_three(handle):
+    total = 0
+    totals = []
     temp_total = 0
 
     for line in handle:
@@ -8,11 +11,12 @@ def find_max_cal(handle):
             line = line.rstrip()
             temp_total += int(line)
         else:
-            if temp_total > max_cal:
-                max_cal = temp_total
+            totals.append(temp_total)
             temp_total = 0
 
-    return max_cal
+    totals.sort(reverse=True)
+
+    return sum(totals[:3])
 
 
-print(find_max_cal(file))
+print(find_max_three(file))
