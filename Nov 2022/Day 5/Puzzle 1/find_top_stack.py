@@ -23,14 +23,24 @@ def find_top_stack(handle):
                 i += 1
             line = handle.readline()
 
-    for l in crate_list:
-        print(crate_list[l])
-
     # iterate through instructions
     line = handle.readline()
-    line = handle.readline()
+    line = handle.readline().rstrip()
+    while len(line):
+        steps = line.split()
+        list_to_move = list(reversed(crate_list[int(steps[3])][:int(steps[1])]))
+        crate_list[int(steps[5])] = list_to_move + crate_list[int(steps[5])]
+        crate_list[int(steps[3])] = crate_list[int(steps[3])][int(steps[1]):]
+        line = handle.readline().rstrip()
 
-
+    for section in crate_list:
+        output += crate_list[section][0]
     return output
 
 print(find_top_stack(file))
+
+# l2 = [1,2,3,4,5]
+# print(l2[:3]) # [1,2,3]
+
+# l2 = [1,2,3,4,5]
+# print(l2[3:]) # [4,5]
